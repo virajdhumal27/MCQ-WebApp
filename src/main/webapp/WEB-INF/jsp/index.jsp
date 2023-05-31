@@ -7,6 +7,14 @@
 <title>Home</title>
 </head>
 <body>
-<h1>Hello this is home page</h1>
+    <div class="container">    
+        <h1>Hello this is home page</h1>
+        
+        <div>
+            <form action="/attempt" method="get">
+                <input type="submit" value="Attemp Quiz" />
+            </form>
+        </div>
+    </div>
 </body>
 </html>
