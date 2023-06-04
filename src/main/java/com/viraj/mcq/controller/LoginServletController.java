@@ -2,6 +2,10 @@ package com.viraj.mcq.controller;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.viraj.mcq.services.UsersService;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,8 +21,11 @@ public class LoginServletController extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 8500919759788101365L;
 	
+	@Autowired
+	private UsersService service;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getSession().invalidate();
+		
 		if(request.getSession().getAttribute("username") == null)
 			request.getRequestDispatcher(JspFileResolver.getJspFile("login.jsp"))
 				.forward(request, response);
@@ -34,11 +41,16 @@ public class LoginServletController extends HttpServlet {
 		
 		System.out.println(username + " " + password);
 		
-		HttpSession session = request.getSession();
+		if(service.validateUser(username, password)) {			
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("username", username);
+			response.sendRedirect("/home");
+		} else {
+			request.getRequestDispatcher(JspFileResolver.getJspFile("login.jsp"))
+			.forward(request, response);
+		}
 		
-		session.setAttribute("username", username);
-		
-		response.sendRedirect("/home");
 		
 	}
 

@@ -1,7 +1,6 @@
 package com.viraj.mcq.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,13 +13,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/attempt")
-public class McqServletController extends HttpServlet {
-
+@WebServlet("/post_questions")
+public class PostQuestionsControllerServlet extends HttpServlet{
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1434402884197262172L;
 	
 	@Autowired
 	private McqService service;
@@ -33,28 +31,14 @@ public class McqServletController extends HttpServlet {
 			response.sendRedirect("/login");
 		}
 		else {
-			request.setAttribute("questions", service.getTenQuestions());
-			request.getRequestDispatcher(JspFileResolver.getJspFile("mcq.jsp")).forward(request, response);
+			request.getRequestDispatcher(JspFileResolver.getJspFile("post_questions.jsp")).forward(request, response);
 		}
 	}
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Integer score = 0;
 		
-		HttpSession session = request.getSession();
-		List<Integer> correctAnswers = (List<Integer>)session.getAttribute("correct_answers");
-		for(int i = 0; i < correctAnswers.size(); i++) {
-			Integer chosen = Integer.parseInt(request.getParameter("question" + i).toString());
-			
-			if(correctAnswers.get(i) == chosen) {
-				score++;
-			}
-		}
-		
-		System.out.println("Score: " + score);
-		session.setAttribute("score", score);
-		request.getRequestDispatcher(JspFileResolver.getJspFile("result.jsp")).forward(request, response);;
+		service.saveQuestion(request);
+		request.getRequestDispatcher(JspFileResolver.getJspFile("post_questions.jsp")).forward(request, response);
 	}
-
 }

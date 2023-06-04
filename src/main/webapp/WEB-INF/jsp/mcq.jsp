@@ -1,7 +1,7 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="com.viraj.mcq.exchanges.McqResponse"%>
 <%@page import="com.viraj.mcq.entity.QuestionsEntity"%>
-<%@ page isELIgnored="false" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -73,68 +73,60 @@
   </style>
 </head>
 <body>
-
-    <!--
-    <h1>MCQ Page</h1>
     
-     <% McqResponse data = (McqResponse)request.getAttribute("questions"); %>
-     
-     <form action="/attempt" method="post">
-     <% int i = 1;
-     
-     for(QuestionsEntity question: data.getQuestions()) { %>
-        
-        <div>        
-	        <label><%= i %>. <%= question.getQuestionDescription() %></label><br/>
-	        <input type="radio" name="question<%= i%>" value="1" /><%= question.getOption1() %><br/>
-	        <input type="radio" name="question<%= i%>" value="2" /><%= question.getOption2() %><br/>
-	        <input type="radio" name="question<%= i%>" value="3" /><%= question.getOption3() %><br/>
-	        <input type="radio" name="question<%= i%>" value="4" /><%= question.getOption4() %><br/>
-        </div><br/><br/>
-     
-     <% i++;
-     }
+     <% McqResponse data = (McqResponse)request.getAttribute("questions");
+     List<Integer> correctAns = new ArrayList<>();
      %>
+     <h2>Java MCQ's Basic</h2>
+     <form action="/attempt" method="post">
+     <% int i = 0; %>
      
-     <input type="submit" value="Submit" />
-     </form>
-     -->
+     <div class="container">
+     <%
+     for(QuestionsEntity question: data.getQuestions()) { %>
      
-     <c:forEach items="${questions}" var="mcq">
-    <div class="container">
-      <h2>Sample MCQ Question</h2>
-      <div class="question">
-        <p>${mcq.question}</p>
+     <div>        
+        <div class="question">
+        <p><%= i+1 %>. <%= question.getQuestionDescription() %></p>
       </div>
-      <ul class="options">
-        <li>
-          <label for="option1">
-            <input type="radio" id="option1" name="answer" value="option1">
-            ${mcq.option1}
+         <ul class="options">
+         <li>
+          <label>
+            <input type="radio" id="option1" name="question<%= i%>" value="1">
+            <%= question.getOption1() %>
           </label>
         </li>
         <li>
-          <label for="option2">
-            <input type="radio" id="option2" name="answer" value="option2">
-            ${mcq.option2}
+          <label>
+            <input type="radio" id="option2" name="question<%= i%>" value="2">
+            <%= question.getOption2() %>
           </label>
         </li>
         <li>
-          <label for="option3">
-            <input type="radio" id="option3" name="answer" value="option3">
-            ${mcq.option3}
+          <label>
+            <input type="radio" id="option3" name="question<%= i%>" value="3">
+            <%= question.getOption3() %>
           </label>
         </li>
         <li>
-          <label for="option4">
-            <input type="radio" id="option4" name="answer" value="option4">
-            ${mcq.option4}
+          <label>
+            <input type="radio" id="option4" name="question<%= i%>" value="4">
+            <%= question.getOption4() %>
           </label>
         </li>
-      </ul>
-      <button class="submit-btn" type="submit">Submit Answer</button>
-    </div>
-  </c:forEach>
+         </ul>
+     </div>
+     <hr>
+  
+	  <% i++;
+	  correctAns.add(question.getCorrectOption());
+	  }
+     
+     session.setAttribute("correct_answers", correctAns);
+     %>
+        <input type="submit" class="submit-btn" value="Submit" />
+     </div>
+     </form>
      
 </body>
 </html>
