@@ -9,9 +9,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>MCQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
       background-color: #e9ecef;
       margin: 0;
       padding: 20px;

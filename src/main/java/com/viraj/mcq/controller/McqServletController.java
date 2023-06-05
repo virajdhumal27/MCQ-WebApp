@@ -43,6 +43,7 @@ public class McqServletController extends HttpServlet {
 		Integer score = 0;
 		
 		HttpSession session = request.getSession();
+		
 		List<Integer> correctAnswers = (List<Integer>)session.getAttribute("correct_answers");
 		for(int i = 0; i < correctAnswers.size(); i++) {
 			Integer chosen = Integer.parseInt(request.getParameter("question" + i).toString());

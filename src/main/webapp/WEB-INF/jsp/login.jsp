@@ -5,9 +5,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Login</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta&family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Poppins', sans-serif;
       background-color: #f5f5f5;
       background-image: url('https://images.template.net/83503/Relaxing-Massage-Background.jpeg');
       background-repeat: no-repeat;
@@ -84,6 +87,7 @@
       <div class="form-group">
         <button type="submit">Login</button>
       </div>
+        <a href="/home">Back to home</a>
     </form>
   </div>
 

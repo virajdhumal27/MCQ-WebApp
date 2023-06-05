@@ -2,10 +2,6 @@ package com.viraj.mcq.controller;
 
 import java.io.IOException;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.viraj.mcq.services.McqService;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;

@@ -39,7 +39,7 @@ public class LoginServletController extends HttpServlet {
 		String username = (String)request.getParameter("username");
 		String password = (String)request.getParameter("password");
 		
-		System.out.println(username + " " + password);
+//		System.out.println(username + " " + password);
 		
 		if(service.validateUser(username, password)) {			
 			HttpSession session = request.getSession();
